@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phân Tích Sunwin</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #0f2027;
+      color: #fff;
+    }
+    .bg-element {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.05;
+    }
+    .casino-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .casino-card {
+      background: #1e2a38;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      max-width: 400px;
+      width: 100%;
+    }
+    .casino-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .casino-title {
+      font-size: 24px;
+      margin: 0;
+      color: #f8d90f;
+    }
+    .casino-subtitle {
+      font-size: 14px;
+      color: #ccc;
+    }
+    .loading-container, .error-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .loading-spinner {
+      width: 30px;
+      height: 30px;
+      border: 4px solid #ccc;
+      border-top: 4px solid #f8d90f;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 10px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .result-display {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .result-card {
+      background: #2c3e50;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .result-label {
+      font-size: 14px;
+      color: #bbb;
+    }
+    .result-value {
+      font-size: 28px;
+      font-weight: bold;
+      margin-top: 10px;
+      padding: 5px 15px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    .result-tai {
+      background-color: #e74a3b;
+      color: #fff;
+    }
+    .result-xiu {
+      background-color: #4e73df;
+      color: #fff;
+    }
+    .session-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .session-card {
+      background: #2c3e50;
+      padding: 10px;
+      border-radius: 10px;
+      width: 48%;
+      text-align: center;
+    }
+    .session-label {
+      font-size: 12px;
+      color: #aaa;
+    }
+    .session-value {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    .prediction-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .prediction-label {
+      font-size: 14px;
+      color: #bbb;
+    }
+    .prediction-value {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    .prediction-tai {
+      color: #e74a3b;
+    }
+    .prediction-xiu {
+      color: #4e73df;
+    }
+    .casino-footer {
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      border-top: 1px solid #444;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-element bg-1"></div>
+  <div class="bg-element bg-2"></div>
+
+  <div class="casino-container">
+    <div class="casino-card">
+      <div class="casino-header">
+        <h1 class="casino-title">WANIN PHÂN TÍCH SUNWIN</h1>
+        <p class="casino-subtitle">Cập Nhật Kết Quả Theo Thời Gian Thực</p>
+      </div>
+
+      <div id="loading" class="loading-container" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Đang tải kết quả...</p>
+      </div>
+
+      <div id="error" class="error-container" style="display: none;">
+        <div class="error-icon">⚠️</div>
+        <p class="error-text" id="error-message"></p>
+      </div>
+
+      <div id="result-display" style="display: block;">
+        <div class="result-display">
+          <div class="result-card animate__animated animate__flipInX">
+            <div class="result-label">Kết Quả</div>
+            <div id="result-value" class="result-value result-xiu">XỈU</div>
+          </div>
+        </div>
+
+        <div class="session-info">
+          <div class="session-card">
+            <div class="session-label">Phiên</div>
+            <div id="current-session" class="session-value">2709359</div>
+          </div>
+          <div class="session-card">
+            <div class="session-label">Phiên Mới</div>
+            <div id="next-session" class="session-value">2709360</div>
+          </div>
+        </div>
+
+        <div class="prediction-container">
+          <div class="prediction-label">Dự Đoán</div>
+          <div id="prediction-value" class="prediction-value prediction-tai">Tài</div>
+        </div>
+      </div>
+
+      <div class="casino-footer">
+        TOOL TÀI XỈU BY : <a href="https://t.me/NgVanNhatx10/" target="_blank" style="color: #f8d90f;">https://t.me/NgVanNhatx10/</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function fetchTXData() {
+      try {
+        document.getElementById('loading').style.display = 'block';
+        const res = await fetch('https://api-huydev-sunwinjs-production.up.railway.app/api/sunwin?key=huydevtoolviphehe');
+        const data = await res.json();
+
+        document.getElementById('result-value').textContent = data.ketqua;
+        document.getElementById('current-session').textContent = data.phien;
+        document.getElementById('next-session').textContent = data.phienmoi;
+        document.getElementById('prediction-value').textContent = data.duDoan;
+
+        const resultEl = document.getElementById('result-value');
+        const predictionEl = document.getElementById('prediction-value');
+
+        resultEl.className = 'result-value result-' + (data.ketqua.toLowerCase() === 'tài' ? 'tai' : 'xiu');
+        predictionEl.className = 'prediction-value prediction-' + (data.duDoan.toLowerCase() === 'tài' ? 'tai' : 'xiu');
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('error').style.display = 'none';
+      } catch (err) {
+        console.error("Lỗi:", err);
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('error').style.display = 'block';
+        document.getElementById('error-message').textContent = 'Không thể tải dữ liệu. Hãy thử lại sau.';
+      }
+    }
+
+    fetchTXData();
+    setInterval(fetchTXData, 60000);
+  </script>
+
+</body>
+</html>
