@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>TOOL TÀI XỈU BY: thaison</title>
+  <style>
+    body { background: #111; color: white; font-family: Arial, sans-serif; text-align: center; margin:0; padding:0; }
+    .container { padding: 50px; }
+    .card { background: #222; padding:20px; border-radius:10px; display:inline-block; min-width:300px; }
+    .label { font-size:18px; margin-top:10px; }
+    .value { font-size:32px; font-weight:bold; margin:10px 0; }
+    footer { margin-top:30px; opacity:0.7; }
+    audio { display:none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="label">Phiên Hiện Tại</div>
+      <div id="session" class="value">...</div>
+      <div class="label">Kết Quả</div>
+      <div id="result" class="value">...</div>
+      <div class="label">Phiên Mới</div>
+      <div id="next-session" class="value">...</div>
+      <div class="label">Dự Đoán</div>
+      <div id="prediction" class="value">...</div>
+    </div>
+    <audio id="ping" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+    <footer>TOOL BY: thaison</footer>
+  </div>
+
+  <script>
+    let lastSession = null;
+    async function loadData() {
+      try {
+        const res = await fetch("https://api-huydev-sunwinjs-production.up.railway.app/api/sunwin?key=huydevtoolviphehe");
+        const d = await res.json();
+        if (d.phien !== lastSession) {
+          document.getElementById("session").textContent = d.phien;
+          document.getElementById("result").textContent = d.ketqua;
+          document.getElementById("next-session").textContent = d.phien_moi;
+          document.getElementById("prediction").textContent = d.du_doan;
+          document.getElementById("ping").play();
+          lastSession = d.phien;
+        }
+      } catch(e) {
+        console.error("Lỗi tải API:", e);
+      }
+    }
+
+    loadData();
+    setInterval(loadData, 60000);
+
+    document.addEventListener("contextmenu", e => e.preventDefault());
+    document.addEventListener("keydown", e => {
+      if (e.key === "F12" || (e.ctrlKey && e.shiftKey && ["I","C","J"].includes(e.key.toUpperCase()))) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
